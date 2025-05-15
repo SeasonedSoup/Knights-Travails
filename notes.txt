@@ -1,0 +1,10 @@
+//a graph traversal problem the size of the graph is [0, 7]
+//can be represent as either an adjacency list, adjacency matrix[utilizing binary], 
+// list of the vertext that have an edge on the vertices taken from khan academy
+
+//the goal is to find the shortest amount of moves to reach between two nodes
+//vertices of the graph is equal to [0, 0] up to [7, 7]
+//the edges are how the knight moves.
+
+//takes paramaters for starting position and ending position. determine the amount of moves and the callback print of each vertex
+//visited afterwards.
