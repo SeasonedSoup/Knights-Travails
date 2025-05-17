@@ -8,3 +8,16 @@
 
 //takes paramaters for starting position and ending position. determine the amount of moves and the callback print of each vertex
 //visited afterwards.
+
+Think about the rules of the board and knight, and make sure to follow them.
+
+From every square, multiple moves are possible. Choose a data structure that will allow you to work with them. 
+Don’t allow any moves to go off the board. a hashset
+
+Decide which search algorithm is best to use for this case. Hint: one of them could be a potentially infinite series.
+//bfs
+
+Use the chosen search algorithm to find the shortest path between the starting square (or node) and the ending square. 
+Output what that full path looks like, e.g.: output full path how??
+idk we can create a res result and th e first one to arrive then just print the joined res.
+
