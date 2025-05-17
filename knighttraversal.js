@@ -1,3 +1,6 @@
+import {LinkedList} from "./linkedList.js"
+
+
 export function knightMoves(start, end) {
     if (isOutOfBounds(start) || isOutOfBounds(end)) {
       console.log("out of bounds");
@@ -6,11 +9,11 @@ export function knightMoves(start, end) {
     
     const directions = [[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,2],[-1,-2]]
     let counter = 0
-  
+    const history = new LinkedList();
+    
     const levelOrderGraph = () => {
         const queue = [];
         const visited = new Set();
-
         queue.push(start);
         visited.add(queue[0].join(','))
 
