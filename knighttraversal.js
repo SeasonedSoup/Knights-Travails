@@ -7,44 +7,55 @@ export function knightMoves(start, end) {
       return;
     }
     
-    const directions = [[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,2],[-1,-2]]
+    const directions = [[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[-1,2],[1,-2],[-1,-2]]
     let counter = 0
-    const history = new LinkedList();
-    
+
     const levelOrderGraph = () => {
         const queue = [];
+        queue.push({
+          pos: start,
+          path: new LinkedList().append(start)
+        });
+        
         const visited = new Set();
-        queue.push(start);
-        visited.add(queue[0].join(','))
+        visited.add(start.join(','))
 
         while (queue.length !== 0) {
             let queueSize = queue.length
             for (let i = 0; i < queueSize; i++) {
-                let cur = queue.shift();
-                if (cur[0] === end[0] && cur[1] === end[1]) {
-                    return counter;
+                let {pos, path} = queue.shift();
+                if (pos[0] === end[0] && pos[1] === end[1]) {
+                    return printResult(counter, path);
                 }
                 for (let [dr, dc] of directions) {
-                    let next = [cur[0] + dr, cur[1] + dc]
-                    if (isOutOfBounds(next) || visited.has(next.join(','))) {
-                        continue
-                    }
+                    let next = [pos[0] + dr, pos[1] + dc]
+                    if (isOutOfBounds(next) || visited.has(next.join(','))) continue;
+              
                     visited.add(next.join(''))
-                    queue.push(next);
+                    
+                    let nextPath = path.copy();
+                    nextPath.append(next);
+                    queue.push({pos:next, path: nextPath});
                 }
             }
             counter++;
         } 
     }
-    return levelOrderGraph();
+    return levelOrderGraph()
 }
-  
-  function isOutOfBounds(arr) {
-    let [dr, dc] = arr;
-  
-    if (dr < 0 || dc < 0 || dr > 7 || dc > 7) {
-      return true;
-    } else {
-      return false;
-    }
+
+function printResult(counter, path) {
+  return `=> The Fastest Route Your Knight Arrived in took ${counter} steps
+                  Heres the Route: ${path.returnArrayVals().map(coord => `[${coord}]`).join(' -> ')}`
+}
+
+
+function isOutOfBounds(arr) {
+  let [dr, dc] = arr;
+
+  if (dr < 0 || dc < 0 || dr > 7 || dc > 7) return true;
+  else {
+    return false;
   }
+}
+

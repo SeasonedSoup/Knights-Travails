@@ -1,7 +1,7 @@
 // val is [coords] history of coords
 
 class Node {
-    constructor(val, next = null) {
+    constructor(val = [], next = null) {
         this.val = val;
         this.next = next;
     }
@@ -14,26 +14,43 @@ export class LinkedList {
 
     append(value) {
         if (!this.head) {
-            prepend(value)
+            return this.prepend(value)
         } else {
             let tmp = this.head
             while (tmp.next !== null) tmp = tmp.next
             tmp.next = new Node(value)
+            return this.returnLinkList();
         }
     }
 
     prepend(value) {
         this.head = new Node(value, this.head)
+        return this.returnLinkList();
     }
 
     copy() {
-        copyLinkList = new LinkedList();
-        let cur = this.head 
+        const copyLinkList = new LinkedList();
+        let tmp = this.head 
 
-        while(cur !== null) {
-            copyLinkList.append(cur.val)
-            cur = cur.next
+        while(tmp !== null) {
+            copyLinkList.append(tmp.val)
+            tmp = tmp.next
         }
         return copyLinkList
+    }
+    //for the path result
+    returnArrayVals() {
+        let values = []
+        let tmp = this.head 
+
+        while(tmp !== null) {
+            values.push(tmp.val)
+            tmp = tmp.next
+        }
+        return values
+    }
+
+    returnLinkList() {
+        return this;
     }
 }
